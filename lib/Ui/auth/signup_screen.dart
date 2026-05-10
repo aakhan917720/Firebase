@@ -1,4 +1,5 @@
 import 'package:firebase/Ui/auth/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,9 +13,12 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
 
-  final emailcontroller = TextEditingController();
-  final passwordcontoller = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
 
 
   @override
@@ -28,7 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Scaffold(
 
         appBar: AppBar(
-          // automaticallyImplyLeading: true,
+          automaticallyImplyLeading: true,
           elevation: 90,
 
           title: Text("Sign Up", style: TextStyle(color: Colors.white),),
@@ -75,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
                           TextFormField(
-                            controller: emailcontroller,
+                            controller: emailController,
                             decoration: InputDecoration(
                               hintText: "Email",
                               icon: Icon(Icons.alternate_email),
@@ -103,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
                           TextFormField(
-                            controller: passwordcontoller,
+                            controller: passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
                               hintText: "Password",
@@ -116,16 +120,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               return null;
                             },
                           ),
-
-
-
-
                         ],
-
                       ),
-
-
-
                     ),
 
 
@@ -139,7 +135,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     InkWell(
                       onTap: (){
                         if(_formkey.currentState!.validate()){
-
+                          _auth.createUserWithEmailAndPassword(
+                              email: emailController.text.toString(),
+                              password: passwordController.text.toString()
+                          );
                         }
                       },
                       child: Container(
