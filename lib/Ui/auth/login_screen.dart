@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onWillPop: ()async{
         SystemNavigator.pop();
         return false;
-;      },
+      },
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -55,11 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
 
 
-
-
-
-
-
                     SizedBox(height: 10,),
 
 
@@ -88,12 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
 
                           ),
-
-
-
-
-
-
 
 
                           SizedBox(height: 10,),

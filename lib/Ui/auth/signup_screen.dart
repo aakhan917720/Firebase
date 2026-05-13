@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../Utils/utils.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,9 +18,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+   bool loading = false;
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+  void SignUp(){
+    setState(() {
+      loading = true;
+    });
+    _auth.createUserWithEmailAndPassword(
+        email: emailController.text.toString(),
+        password: passwordController.text.toString()).then((value){
+      setState(() {
+        loading = false;
+      });
+    }).onError((error, stackTrace){
+      Utils().toastMessages(error.toString());
+      setState(() {
+        loading = false;
+      });
+    });
+}
 
 
   @override
@@ -32,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Scaffold(
 
         appBar: AppBar(
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
           elevation: 90,
 
           title: Text("Sign Up", style: TextStyle(color: Colors.white),),
@@ -59,11 +80,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-
-
-
-
-
 
 
                     SizedBox(height: 10,),
@@ -96,12 +112,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
 
 
-
-
-
-
-
-
                           SizedBox(height: 10,),
 
 
@@ -128,17 +138,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
 
-
                     SizedBox(height: 10,),
 
-
+                    loading ? CircularProgressIndicator() :
                     InkWell(
                       onTap: (){
                         if(_formkey.currentState!.validate()){
-                          _auth.createUserWithEmailAndPassword(
-                              email: emailController.text.toString(),
-                              password: passwordController.text.toString()
-                          );
+                          SignUp();
                         }
                       },
                       child: Container(
