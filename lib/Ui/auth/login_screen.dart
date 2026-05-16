@@ -1,5 +1,9 @@
 import 'package:firebase/Ui/auth/signup_screen.dart';
+import 'package:firebase/Ui/posts/post_screen.dart';
+import 'package:firebase/Utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 
@@ -15,6 +19,47 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailcontroller = TextEditingController();
   final passwordcontoller = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+  final _auth = FirebaseAuth.instance;
+  bool loading = false;
+
+ @override
+  void dispose() {
+    // TODO: implement dispose
+    emailcontroller.dispose();
+    passwordcontoller.dispose();
+    super.dispose();
+
+  }
+
+  void login(){
+
+   setState(() {
+     loading = true;
+   });
+
+   _auth.signInWithEmailAndPassword(
+       email: emailcontroller.text,
+       password: passwordcontoller.text.toString()).then((value){
+         // Utils().toastMessages(value.user?.email ?? emailcontroller.text);
+     Utils().toastMessages(value.user!.email.toString());
+     Navigator.push(
+       context,
+       MaterialPageRoute(
+           builder: (context)=>PostScreen())
+     );
+         setState(() {
+           loading = false;
+         });
+   }).onError((error, stackTrace) {
+     debugPrint(error.toString());
+     Utils().toastMessages(error.toString());
+     setState(() {
+       loading = false;
+     });
+   });
+ }
+
+
 
 
   @override
@@ -122,11 +167,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     SizedBox(height: 10,),
 
-
+                    loading ? CircularProgressIndicator()
+                    :
                     InkWell(
                       onTap: (){
                         if(_formkey.currentState!.validate()){
-
+                          login();
                         }
                       },
                       child: Container(
@@ -152,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 10,),
 
 
+                    // ROW BUTTON
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

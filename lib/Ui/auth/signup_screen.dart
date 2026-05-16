@@ -18,9 +18,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
-   bool loading = false;
+  final _auth = FirebaseAuth.instance;
+  bool loading = false;
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  // FirebaseAuth _auth = FirebaseAuth.instance;
 
 
   void SignUp(){
@@ -140,6 +141,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     SizedBox(height: 10,),
 
+                    // SIGN UP BUTTON
+
                     loading ? CircularProgressIndicator() :
                     InkWell(
                       onTap: (){
@@ -169,12 +172,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
 
+                    // I HAVE ALREADY AN ACCOUNT
+                    // LOGIN
                     SizedBox(height: 10,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
 
-                        Text("I have an account?"),
+                        Text("I have an account ?"),
 
                         TextButton(
 
@@ -198,10 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
-            )
-
-
-
+            ),
           ],
         ),
       ),
