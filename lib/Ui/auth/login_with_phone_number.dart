@@ -32,6 +32,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
           SizedBox(height: 50,),
 
           TextFormField(
+            keyboardType: TextInputType.number,
             controller: phoneNumberController,
             decoration: InputDecoration(
               hintText: "+1 234 5678 934"
@@ -44,7 +45,7 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
           ),
 
           InkWell(
-            onTap: (){
+            onTap: loading ? null : (){
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(
@@ -52,15 +53,30 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
               //   )
               // );
 
+              setState(() {
+                loading = true;
+              });
+
               auth.verifyPhoneNumber(
                 phoneNumber: phoneNumberController.text,
                   verificationCompleted: (_){
-
+                    setState(() {
+                      loading = false;
+                    });
                   },
                   verificationFailed: (e){
+                  print("❌ Failed: ${e.message}");
+                    setState(() {
+                      loading = false;
+                    });
                   Utils().toastMessages(e.toString());
                   },
+
                   codeSent: (String verificationId, int? token){
+                    print("✅ Code Sent! VerificationId: $verificationId");
+                    setState(() {
+                      loading = false;
+                    });
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -68,13 +84,20 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                     )
                   );
                   },
+
                   codeAutoRetrievalTimeout: (e){
+                    print("⏰ Timeout: $e");
+                    setState(() {
+                      loading = false;
+                    });
                   Utils().toastMessages(e.toString());
                   }
+
               );
 
             },
             child: Container(
+
 
               height: 50,
               decoration: BoxDecoration(
@@ -85,7 +108,21 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
                 color: Colors.blue,
               ),
 
-              child: Center(child: Text("Login")),
+              child: Center(
+                child: loading
+                    ? SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2.5,
+                  ),
+                )
+                    : Text(
+                  "Login",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
 
             ),
           )
