@@ -8,6 +8,9 @@ import '../Ui/auth/login_screen.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../firestore/fire_list_screen.dart';
+import '../upload_files/upload_img.dart';
+
 
 class SplashSerivces {
 
@@ -21,7 +24,7 @@ void login(BuildContext context){
     Timer(Duration(seconds: 2), ()=>Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context)=>PostScreen(),
+        builder: (context)=>UploadImage(),
       ),
     )
     );

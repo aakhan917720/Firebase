@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "28bb3ae56f117b5aec029d702a90f57d285cd975c3c5c281eaca38dbc47c5937"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.5+2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -198,6 +206,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "3854fe5e3bff0b113c658f260b90c95dea17c92db0f2addeac2e343dd9969785"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.35"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -232,6 +248,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  img_picker:
+    dependency: "direct main"
+    description:
+      name: img_picker
+      sha256: "289796ebc667d1031e944c82709f5c67f06a9698ba4538baf5e002f10e562c7c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
+  img_picker_android:
+    dependency: transitive
+    description:
+      name: img_picker_android
+      sha256: "930be3e686b164676383d8775f818affa883f88191c42af983b1a781996a3589"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  img_picker_ios:
+    dependency: transitive
+    description:
+      name: img_picker_ios
+      sha256: bde838d7a9fcafcdde6183c701a31d6b846b7b761714ed3438b3f25ac406ac55
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
+  img_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: img_picker_platform_interface
+      sha256: b33367f332f1ad9f7174a4e02b8932376c15a79d5d3aef34cca139832558e2bd
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -399,4 +447,4 @@ packages:
     version: "1.1.1"
 sdks:
   dart: ">=3.11.5 <4.0.0"
-  flutter: ">=3.27.0"
+  flutter: ">=3.38.0"

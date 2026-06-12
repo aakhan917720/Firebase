@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
+import '../posts/forgot_password.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -199,7 +201,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 10,),
 
 
-                    // ROW BUTTON
+                    // FORGOT BUTTON
+
+                    Align(
+                      alignment: Alignment.center,
+                      child: TextButton(
+                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context)=>ForgotPassword()
+                              )
+                          );
+                        },
+
+                        child: Text("Forgot button"),
+
+                      ),
+                    ),
+
+
+
+                    // DO NOT HAVE ACCOUNT SIGN UP
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
