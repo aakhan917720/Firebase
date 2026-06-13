@@ -24,7 +24,7 @@ void login(BuildContext context){
     Timer(Duration(seconds: 2), ()=>Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context)=>UploadImage(),
+        builder: (context)=>PostScreen(),
       ),
     )
     );
